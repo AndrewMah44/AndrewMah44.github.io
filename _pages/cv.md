@@ -11,9 +11,11 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+* Ph.D, Neural Science, New York University, 2024
+  * Advisor: Christine Constantinople
+  * Thesis: Hidden State Inference Modulates Reward Learning but Not Striatal Dopamine Release
+* B.S., Neuroscience and Mathematics, Washington and Lee University, 2018
+  * With Honors, *magna cum laude*
 
 Work experience
 ======
