@@ -1,0 +1,55 @@
+{% include base_path %}
+
+{% if post.header.teaser %}
+  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+{% else %}
+  {% assign teaser = site.teaser %}
+{% endif %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+<div class="{{ include.type | default: "list" }}__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+
+    {% if post.authors %}
+      {% for author in post.authors %}
+        {% if author == "Andrew Mah" %}
+          <strong>{{ author }}</strong>{% unless forloop.last %}, {% endunless %}
+        {% else %}
+          {{ author }}{% unless forloop.last %}, {% else %}. {% endunless %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if post.pubdate %}
+      ({{ post.pubdate }}).
+    {% endif %}
+
+    {% if post.title %}
+        <a href="{{ post.paperurl }}">{{ post.title }}.</a>
+    {% endif %}
+
+    {% if post.venue %}
+        <em>{{ post.venue }}.</em>
+    {% endif %}
+
+    {% if post.excerpt and site.read_more != 'enabled' %}
+    <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>
+    {% elsif post.excerpt and site.read_more == 'enabled' %}
+    <p class="archive__item-excerpt" itemprop="description"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
+    {% endif %}
+    
+    {% if post.paperpdf and post.dataurl and post.codeurl %}
+        <button onclick="window.location.href='{{ post.paperpdf }}';" class="GFG">PDF</button>  
+        <button onclick="window.location.href='{{ post.dataurl }}';" class="GFG">Data</button> 
+        <button onclick="window.location.href='{{ post.codeurl }}';" class="GFG">Code</button>
+    {% elsif post.paperurl %}
+        <button onclick="window.location.href='{{ post.paperpdf }}';" class="GFG">PDF</button>  
+    {% endif %}
+    <p><br></p>
+  </article>
+</div>

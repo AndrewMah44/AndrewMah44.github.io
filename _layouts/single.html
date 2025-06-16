@@ -46,40 +46,40 @@ layout: default
 
       <section class="page__content" itemprop="text">
         {{ content }}
-        {% if page.authors %}
-          <p><strong>Authors:</strong> {{ page.authors | join: ", " }}</p>
-        {% endif %}
-        {% if page.code %}
-          <p><strong>Code Repository:</strong> <a href="{{ page.code }}" target="_blank">{{ page.code }}</a></p>
-        {% endif %}
-        {% if page.data %}
-          <p><strong>Data Repository:</strong> <a href="{{ page.data }}" target="_blank">{{ page.data }}</a></p>
-        {% endif %}
-        {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation and page.paperurl and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.citation and page.paperurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation and page.paperurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a></p>
-        {% elsif page.citation and page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.paperurl and page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% elsif page.citation %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}</p>
-        {% elsif page.slidesurl %}
-          <p style="font-size: smaller"><a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
-        {% endif %}
+        {% comment %}
+        Paper information block including citation, download links, and custom metadata like authors, code, data
+        {% endcomment %}
+        <p style="font-size: smaller">
+          {% if page.authors %}
+            <br /><strong>Authors:</strong> {{ page.authors | join: ", " }}
+          {% endif %}
+
+          {% if page.code %}
+            <br /><strong>Code Repository:</strong> <a href="{{ page.code }}" target="_blank">{{ page.code }}</a>
+          {% endif %}
+
+          {% if page.data %}
+            <br /><strong>Data Repository:</strong> <a href="{{ page.data }}" target="_blank">{{ page.data }}</a>
+          {% endif %}
+
+          {% if page.citation %}
+            <strong>Recommended citation:</strong> {{ page.citation }}<br />
+          {% endif %}
+
+          {% assign links = "" %}
+          {% if page.paperurl %}
+            {% assign links = links | append: '<a href="' | append: page.paperurl | append: '">Download Paper</a>' %}
+          {% endif %}
+          {% if page.slidesurl %}
+            {% if links != "" %}{% assign links = links | append: ' | ' %}{% endif %}
+            {% assign links = links | append: '<a href="' | append: page.slidesurl | append: '">Download Slides</a>' %}
+          {% endif %}
+          {% if page.bibtexurl %}
+            {% if links != "" %}{% assign links = links | append: ' | ' %}{% endif %}
+            {% assign links = links | append: '<a href="' | append: page.bibtexurl | append: '">Download Bibtex</a>' %}
+          {% endif %}
+          {{ links | raw }}
+        </p>
 
         {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
