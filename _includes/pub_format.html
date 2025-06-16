@@ -43,13 +43,13 @@
     <p class="archive__item-excerpt" itemprop="description"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
     {% endif %}
     
-    {% if post.paperpdf and post.dataurl and post.codeurl %}
+    <!-- {% if post.paperpdf and post.dataurl and post.codeurl %}
         <button onclick="window.location.href='{{ post.paperpdf }}';" class="GFG">PDF</button>  
         <button onclick="window.location.href='{{ post.dataurl }}';" class="GFG">Data</button> 
         <button onclick="window.location.href='{{ post.codeurl }}';" class="GFG">Code</button>
     {% elsif post.paperurl %}
         <button onclick="window.location.href='{{ post.paperpdf }}';" class="GFG">PDF</button>  
-    {% endif %}
+    {% endif %} -->
     <p><br></p>
   </article>
 </div>
