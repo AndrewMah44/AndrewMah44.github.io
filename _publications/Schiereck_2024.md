@@ -15,7 +15,7 @@ authors:
 date: 2024-10-29
 pubdate: 2024
 venue: "bioRxiv"
-# paperurl: "https://www.biorxiv.org/content/10.1101/2024.10.29.620879v1"
+paperurl: "https://www.biorxiv.org/content/10.1101/2024.10.29.620879v1"
 # codeurl: "https://github.com/amah/ngd"
 # dataurl: "https://zenodo.org/record/999999"
 ---
